@@ -21,7 +21,11 @@
               <div class="col">
                 <h3>Personal Information</h3>
                 <label for="first_name">First name</label>
-                <input type="text" class="form-control" name="first_name" id="first_name" required autocomplete="off">
+                <!-- For displaying erors, get first_name from Form object -->
+                {{with .Form.Errors.Get "first_name"}}
+                <label for="" class="text-danger">{{.}}</label>
+                {{end}}
+                <input type="text" class='form-control {{with .Form.Errors.Get "first_name"}} is-invalid {{end}}' name="first_name" id="first_name" required autocomplete="off">
 
               </div>
               <div class="col">

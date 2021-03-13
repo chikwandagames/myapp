@@ -9,7 +9,7 @@ import (
 // For holding all the info associatied with our forms
 type Form struct {
 	url.Values
-	Error errors
+	Errors errors
 }
 
 // Initializes a for struct
@@ -27,8 +27,15 @@ func (f *Form) Has(field string, r *http.Request) bool {
 	// Check if the request has the field
 	x := r.Form.Get(field)
 	// Because its a required field, check if its empty
-	if x == "" {
-		return false
+	if x != "" {
+		return true
 	}
-	return true
+	f.Errors.Add(field, "This field is required")
+	return false
+}
+
+// Valid returns true if there are no errors
+func (f *Form) Valid() bool {
+	// Return true, if no errors
+	return len(f.Errors) == 0
 }
