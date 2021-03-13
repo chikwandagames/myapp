@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/chikwandagames/myapp/internal/config"
+	"github.com/chikwandagames/myapp/internal/forms"
 	"github.com/chikwandagames/myapp/internal/models"
 	"github.com/chikwandagames/myapp/internal/render"
 )
@@ -68,6 +69,13 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 
 // Reservation renders the make reservation page
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, r, "make-reservation.page.html", &models.TemplateData{
+		Form: forms.New(nil),
+	})
+}
+
+// PostReservation handles the posting of a reservation form
+func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, r, "make-reservation.page.html", &models.TemplateData{})
 }
 

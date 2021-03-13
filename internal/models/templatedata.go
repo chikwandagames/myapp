@@ -1,5 +1,8 @@
 package models
 
+import "github.com/chikwandagames/myapp/internal/forms"
+
+// This is made available to every page on the site
 // TemplateData holds data sent from handlers to templates
 type TemplateData struct {
 	// These are types that might be sent to the templates
@@ -15,4 +18,5 @@ type TemplateData struct {
 	Flash   string
 	Warning string
 	Error   string
+	Form    *forms.Form
 }
