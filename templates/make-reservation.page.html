@@ -1,0 +1,33 @@
+{{template "base" .}}
+<!-- "base" use the base template, "." include the data thats passed -->
+
+<!-- content will be injected back into the base template -->
+{{define "content"}}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <!-- Form -->
+      <h1>Make reservation</h1>
+      <form action="" method="post" class="needs-validation" novalidate>
+        <div class="form-group mt-5">
+          <label for="first_name">First name</label>
+          <input type="text" class="form-control" name="first_name" id="first_name" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="last_name">Last name</label>
+          <input type="text" class="form-control" name="last_name" id="last_name" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" name="email" id="email" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="text" class="form-control" name="phone" id="phone" required autocomplete="off">
+        </div>
+        <hr>
+        <input type="submit" class="btn btn-primary" value="Make Reservation">
+      </form>
+    </div>
+  </div>
+{{end}}

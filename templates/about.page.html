@@ -1,0 +1,19 @@
+{{template "base" .}}
+<!-- "base" use the base template, "." include the data thats passed -->
+
+<!-- content will be injected back into the base template -->
+{{define "content"}}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>About Page</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <a href="/make-reservation" class="btn btn-success">Check Availability</a>
+    </div>
+  </div>
+</div>
+
+{{end}}

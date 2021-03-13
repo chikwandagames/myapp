@@ -1,0 +1,41 @@
+{{template "base" .}}
+<!-- "base" use the base template, "." include the data thats passed -->
+
+<!-- content will be injected back into the base template -->
+{{define "content"}}
+<div class="container">
+  <div class="row">
+    <!-- bootstrap allows for 12 columns, lg-3 makes 3 on large monitors-->
+    <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"> -->
+    <div class="col">
+      <!-- img-fluid makes the image responsive -->
+      <img src="static/images/marjors-suite.png" class="img-fluid mt-2 mx-auto d-block room-image" alt="Room image" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center mt-4">Major's Suite</h1>
+      <p>
+        Your home away form home, set on the majestic waters of the Atlantic
+        Ocean, this will be a vacation to remember. Your home away form
+        home, set on the majestic waters of the Atlantic Ocean, this will be
+        a vacation to remember. Your home away form home, set on the
+        majestic waters of the Atlantic Ocean, this will be a vacation to
+        remember. Your home away form home, set on the majestic waters of
+        the Atlantic Ocean, this will be a vacation to remember. Your home
+        away form home, set on the majestic waters of the Atlantic Ocean,
+        this will be a vacation to remember. Your home away form home, set
+        on the majestic waters of the Atlantic Ocean, this will be a
+        vacation to remember.
+      </p>
+      <!-- </div> -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <a href="/make-reservation" class="btn btn-success">Check Availability</a>
+    </div>
+  </div>
+</div>
+
+{{end}}

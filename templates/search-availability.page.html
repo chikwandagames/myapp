@@ -1,0 +1,57 @@
+{{template "base" .}}
+<!-- "base" use the base template, "." include the data thats passed -->
+
+<!-- content will be injected back into the base template -->
+{{define "content"}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <!--Hack, for centering form -->
+    <div class="col-md-6">
+      <h1 class="mt-5">Search for Reservation</h1>
+      <!-- Form -->
+      <form action="/search-availability" method="post" novalidate class="needs-validation">
+        <!-- CRSF requires a hidden field with name="csrf_tocken" on the form doing a post -->
+        <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+        <div class="form-row">
+          <div class="col">
+            <div class="form-row" id="reservation-dates-modal">
+              <div class="col">
+                <input required class="form-control" type="text" name="start" placeholder="Arrival date"
+                  autocomplete="off">
+              </div>
+              <div class="col">
+                <input required class="form-control" type="text" name="end" placeholder="Departure date"
+                  autocomplete="off">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Search Availability</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p id="myParagraph">Some text</p>
+      <p>
+        <button id="colorButton" class="btn btn-outline-secondary">Click me</button>
+      </p>
+    </div>
+  </div>
+</div>
+
+{{end}}
+
+{{define "js"}}
+<script>
+  const elem = document.getElementById('reservation-dates-modal')
+  const rangepicker = new DateRangePicker(elem, {
+    // Change date format
+    format: 'yyyy-mm-dd',
+  })
+
+</script>
+
+{{end}}

@@ -1,0 +1,127 @@
+{{template "base" .}}
+<!-- "base" use the base template, "." include the data thats passed -->
+
+<!-- content will be injected back into the base template -->
+{{define "content"}}
+
+<div class="container">
+  <div class="row">
+    <!-- bootstrap allows for 12 columns, lg-3 makes 3 on large monitors-->
+    <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"> -->
+    <div class="col">
+      <!-- img-fluid makes the image responsive -->
+      <img src="/static/images/generals-quarters.png" class="img-fluid mt-2 mx-auto d-block room-image" alt="Room image" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center mt-4">General's Quarters</h1>
+      <p>
+        Your home away form home, set on the majestic waters of the Atlantic
+        Ocean, this will be a vacation to remember. Your home away form
+        home, set on the majestic waters of the Atlantic Ocean, this will be
+        a vacation to remember. Your home away form home, set on the
+        majestic waters of the Atlantic Ocean, this will be a vacation to
+        remember. Your home away form home, set on the majestic waters of
+        the Atlantic Ocean, this will be a vacation to remember. Your home
+        away form home, set on the majestic waters of the Atlantic Ocean,
+        this will be a vacation to remember. Your home away form home, set
+        on the majestic waters of the Atlantic Ocean, this will be a
+        vacation to remember.
+      </p>
+      <!-- </div> -->
+    </div>
+  </div>
+  <iframe hidden  name="hiddenFrame" class="hide"></iframe>
+  <h3>Choose dates</h3>
+  <form id="myDIV" onsubmit="foo()" action="" target="hiddenFrame"  method="post" novalidate class="needs-validation">
+    <!-- CRSF requires a hidden field with name="csrf_tocken" on the form doing a post -->
+    <!-- <input type="hidden" name="csrf_token" value="{{.CSRFToken}}"> -->
+    <div class="form-row">
+      <div class="col">
+        <div class="form-row" id="reservation-dates-modal">
+          <div class="col">
+            <input required class="form-control" type="text" name="start" placeholder="Arrival date"
+              autocomplete="off">
+          </div>
+          <div class="col">
+            <input required class="form-control" type="text" name="end" placeholder="Departure date"
+              autocomplete="off">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Search Availability</button>
+  </form>
+  <div class="row">
+    <div class="col text-center">
+      <a id="check-availability-button" onclick="myFunction()" href="#!" class="btn btn-success">Check Availability</a>
+    </div>
+  </div>
+</div>
+
+{{end}}
+
+{{define "js"}}
+<script>
+  const elem = document.getElementById('reservation-dates-modal')
+  const rangepicker = new DateRangePicker(elem, {
+    // Change date format
+    format: 'yyyy-mm-dd',
+  })
+
+  function myFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+  const  foo = () => {
+    form = document.getElementById("myDIV")
+    // Create form data variable containing all imputs from the form
+    const formData = new FormData(form)
+    // Append csrf alternative to creating a hidden input, e.g. above
+    formData.append("csrf_token", "{{.CSRFToken}}")
+
+    fetch("/search-availability-json", {
+      method: "post",
+      body: formData
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+      })
+  }
+
+</script>
+<!-- <script>
+  document.getElementById("check-availability-button").addEventListener("click", function () {
+      let html = `
+      <form id="check-availability-form" action="" method="post" novalidate class="needs-validation">
+          <div class="form-row">
+              <div class="col">
+                  <div class="form-row" id="reservation-dates-modal">
+                      <div class="col">
+                          <input disabled required class="form-control" type="text" name="start" id="start" placeholder="Arrival">
+                      </div>
+                      <div class="col">
+                          <input disabled required class="form-control" type="text" name="end" id="end" placeholder="Departure">
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      </form>
+      `;
+      attention.custom({
+          title: 'Choose your dates',
+          msg: html,
+      });
+  })
+</script> -->
+  
+{{end}}
