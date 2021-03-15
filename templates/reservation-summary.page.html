@@ -1,0 +1,35 @@
+{{template "base" .}}
+<!-- "base" use the base template, "." include the data thats passed -->
+
+<!-- content will be injected back into the base template -->
+{{define "content"}}
+<!-- Get data from the make-reservation redirect -->
+{{$res := index .Data "reservation"}}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Reservation Summary</h1>
+      <hr>
+
+      <table  class="table table-striped">
+        <thead></thead>
+          <tbody>
+            <tr>
+              <td>Name:</td>
+              <td>{{$res.FirstName}} {{$res.LastName}}</td>
+            </tr>
+            <tr>
+              <td>Phone:</td>
+              <td>{{$res.Phone}}</td>
+            </tr>
+            <tr>
+              <td>Arrival date:</td>
+              <td></td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{{end}}

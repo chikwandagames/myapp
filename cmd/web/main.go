@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
@@ -9,6 +10,7 @@ import (
 	"github.com/alexedwards/scs/v2"
 	"github.com/chikwandagames/myapp/internal/config"
 	"github.com/chikwandagames/myapp/internal/handlers"
+	"github.com/chikwandagames/myapp/internal/models"
 	"github.com/chikwandagames/myapp/internal/render"
 )
 
@@ -22,6 +24,8 @@ var session *scs.SessionManager
 // that package
 
 func main() {
+	// Tell the App what kind Custom types that we want to store in a session
+	gob.Register(models.Reservation{})
 
 	// Change this to true when in production
 	app.InProduction = false
@@ -59,7 +63,7 @@ func main() {
 	// giving the render package access to app (template)
 	render.NewTemplates(&app)
 
-	fmt.Println(fmt.Sprintf("Staring application on port %s", portNumber))
+	fmt.Printf("Staring application on port %s \n", portNumber)
 
 	// Start a webserver
 

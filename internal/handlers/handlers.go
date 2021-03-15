@@ -77,6 +77,7 @@ func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 	data["reservation"] = emptyReservation
 
 	render.RenderTemplate(w, r, "make-reservation.page.html", &models.TemplateData{
+		// New(nil) is and empty form
 		Form: forms.New(nil),
 		Data: data,
 	})
@@ -119,8 +120,15 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 			Form: form,
 			Data: data,
 		})
+		// If not valid return
 		return
 	}
+
+	// Redirect to /reservation-summary, and use session to forward forward form data
+	// to Reservation-summary page
+	// Put(), takes a context, key and value of item to store in session
+	m.App.Session.Put(r.Context(), "reservation", reservation)
+	http.Redirect(w, r, "/reservation-summary", http.StatusSeeOther)
 
 }
 
@@ -181,5 +189,22 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 	// Header that tell the browser what kind of response we are sending
 	w.Header().Set("Content-type", "application/json")
 	w.Write(out)
+
+}
+
+func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
+	// Get data received from the redirect from make-reservation form.
+	// .(models.Reservation) asserts that the data is of type models.Reservaion
+	reservation, ok := m.App.Session.Get(r.Context(), "reservation").(models.Reservation)
+
+	if !ok {
+		log.Println("Cannot get item from session")
+		return
+	}
+	data := make(map[string]interface{})
+	data["reservation"] = reservation
+	render.RenderTemplate(w, r, "reservation-summary.page.html", &models.TemplateData{
+		Data: data,
+	})
 
 }
