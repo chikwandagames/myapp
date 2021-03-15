@@ -69,8 +69,16 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 
 // Reservation renders the make reservation page
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
+	// To repopulate input field if a user enters the wrong info, so that the
+	// user does not need to retype every word
+	var emptyReservation models.Reservation
+	data := make(map[string]interface{})
+	// Key should match key in Post Reservation
+	data["reservation"] = emptyReservation
+
 	render.RenderTemplate(w, r, "make-reservation.page.html", &models.TemplateData{
 		Form: forms.New(nil),
+		Data: data,
 	})
 }
 
@@ -96,11 +104,14 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	form := forms.New(r.PostForm)
 
 	// Now validate, does form have ...
-	form.Has("first_name", r)
+	// form.Has("first_name", r)
+	// Pass the required fields, check if any of these are empty
+	form.Required("first_name", "last_name", "email")
+	form.MinLength("email", 5, r)
 
 	if !form.Valid() {
 		data := make(map[string]interface{})
-		data["reservaion"] = reservation
+		data["reservation"] = reservation
 
 		// Rerender the form
 		render.RenderTemplate(w, r, "make-reservation.page.html", &models.TemplateData{

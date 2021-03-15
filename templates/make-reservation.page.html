@@ -5,13 +5,11 @@
 {{define "content"}}
 <div class="container">
   <div class="row">
-
-
-
-
     <div class="col-md-12">
       <!-- Form -->
       <!-- <h1>Make reservation</h1> -->
+      <!-- declare a varaible -->
+      {{$res := index .Data "reservation"}}
       <form action="" method="post" class="" novalidate>
         <!-- CRSF requires a hidden field with name="csrf_tocken" on the form doing a post -->
         <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
@@ -25,7 +23,8 @@
                 {{with .Form.Errors.Get "first_name"}}
                 <label for="" class="text-danger">{{.}}</label>
                 {{end}}
-                <input type="text" class='form-control {{with .Form.Errors.Get "first_name"}} is-invalid {{end}}' name="first_name" id="first_name" required autocomplete="off">
+                <!-- input box red outline error -->
+                <input type="text" value="{{$res.FirstName}}" class='form-control {{with .Form.Errors.Get "first_name"}} is-invalid {{end}}' name="first_name" id="first_name" required autocomplete="off">
 
               </div>
               <div class="col">
@@ -40,8 +39,11 @@
           <div class="col">
             <div class="form-row" id="reservation-dates-modal">
               <div class="col">
-                <label for="last_name">Last name</label>
-                <input type="text" class="form-control" name="last_name" id="last_name" required autocomplete="off">
+                <label for="first_name">Last name</label>
+                {{with .Form.Errors.Get "last_name"}}
+                <label for="last_name" class="text-danger">{{.}}</label>
+                {{end}}
+                <input type="text" class='form-control {{with .Form.Errors.Get "last_name"}} is-invalid {{end}}' value="{{$res.LastName}}" name="last_name" id="last_name" required autocomplete="off">
               </div>
               <div class="col">
                 <label for="last_name">Last name</label>
@@ -54,8 +56,11 @@
           <div class="col">
             <div class="form-row" id="reservation-dates-modal">
               <div class="col">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" name="email" id="email" required autocomplete="off">
+                <label for="first_name">Email</label>
+                {{with .Form.Errors.Get "email"}}
+                <label for="email" class="text-danger">{{.}}</label>
+                {{end}}
+                <input type="email" value="{{$res.Email}}" class='form-control {{with .Form.Errors.Get "email"}} is-invalid {{end}}' name="email" id="email" required autocomplete="off">
               </div>
               <div class="col">
                 <label for="last_name">Last name</label>
@@ -68,8 +73,11 @@
           <div class="col">
             <div class="form-row" id="reservation-dates-modal">
               <div class="col">
-                <label for="phone">Phone</label>
-                <input type="text" class="form-control" name="phone" id="phone" required autocomplete="off">
+                <label for="first_name">Phone</label>
+                {{with .Form.Errors.Get "phone"}}
+                <label for="phone" class="text-danger">{{.}}</label>
+                {{end}}
+                <input type="text" value="{{$res.Phone}}" class='form-control {{with .Form.Errors.Get "phone"}} is-invalid {{end}}' name="phone" id="phone" required autocomplete="off">
               </div>
               <div class="col">
                 <label for="last_name">Last name</label>
