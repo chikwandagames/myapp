@@ -24,6 +24,30 @@ var session *scs.SessionManager
 // that package
 
 func main() {
+	err := run()
+
+	if err != nil {
+		// log.Fatal, writes to console and stops application
+		log.Fatal(err)
+	}
+
+	fmt.Printf("Staring application on port %s \n", portNumber)
+
+	// Start a webserver
+
+	srv := &http.Server{
+		Addr:    portNumber,
+		Handler: routes(&app),
+	}
+
+	err = srv.ListenAndServe()
+	// If theres an error
+	log.Fatal(err)
+
+}
+
+// For testing
+func run() error {
 	// Tell the App what kind Custom types that we want to store in a session
 	gob.Register(models.Reservation{})
 
@@ -48,6 +72,7 @@ func main() {
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
 		log.Fatal("cannot create template cache")
+		return err
 	}
 	// Store template cache in the app
 	app.TemplateCache = tc
@@ -63,17 +88,6 @@ func main() {
 	// giving the render package access to app (template)
 	render.NewTemplates(&app)
 
-	fmt.Printf("Staring application on port %s \n", portNumber)
-
-	// Start a webserver
-
-	srv := &http.Server{
-		Addr:    portNumber,
-		Handler: routes(&app),
-	}
-
-	err = srv.ListenAndServe()
-	// If theres an error
-	log.Fatal(err)
-
+	// Return nil, if no error
+	return nil
 }

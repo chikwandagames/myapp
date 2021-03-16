@@ -1,0 +1,12 @@
+mode: set
+github.com/chikwandagames/myapp/cmd/web/main.go:26.13,29.16 2 0
+github.com/chikwandagames/myapp/cmd/web/main.go:34.2,45.16 4 0
+github.com/chikwandagames/myapp/cmd/web/main.go:29.16,32.3 1 0
+github.com/chikwandagames/myapp/cmd/web/main.go:50.18,73.16 10 1
+github.com/chikwandagames/myapp/cmd/web/main.go:78.2,92.12 6 1
+github.com/chikwandagames/myapp/cmd/web/main.go:73.16,76.3 2 0
+github.com/chikwandagames/myapp/cmd/web/middleware.go:12.53,14.71 1 1
+github.com/chikwandagames/myapp/cmd/web/middleware.go:14.71,17.3 2 0
+github.com/chikwandagames/myapp/cmd/web/middleware.go:23.45,37.2 3 1
+github.com/chikwandagames/myapp/cmd/web/middleware.go:44.50,46.2 1 1
+github.com/chikwandagames/myapp/cmd/web/routes.go:14.49,50.2 18 1
