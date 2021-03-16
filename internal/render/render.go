@@ -18,6 +18,10 @@ var functions = template.FuncMap{}
 
 var app *config.AppConfig
 
+// Because we do not running our tests from the root of the app
+// we need to create a path
+var pathToTemplates = "./templates"
+
 // NewTemplates sets the config for the template package
 func NewTemplates(a *config.AppConfig) {
 	app = a
@@ -82,7 +86,7 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 	myCache := map[string]*template.Template{}
 
 	// Add files with .page.html suffix to pages var
-	pages, err := filepath.Glob("./templates/*.page.html")
+	pages, err := filepath.Glob(fmt.Sprintf("%s/*.page.html", pathToTemplates))
 	if err != nil {
 		return myCache, err
 	}
@@ -95,14 +99,14 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 		// Create a template set
 		ts, err := template.New(name).Funcs(functions).ParseFiles(page)
 
-		matches, err := filepath.Glob("./templates/*.layout.html")
+		matches, err := filepath.Glob(fmt.Sprintf("%s/*.page.html", pathToTemplates))
 		if err != nil {
 			return myCache, err
 		}
 
 		// If we find a match, i.e. a file with the suffix, ./templates/*.layout.html
 		if len(matches) > 0 {
-			ts, err = ts.ParseGlob("./templates/*.layout.html")
+			ts, err = ts.ParseGlob(fmt.Sprintf("%s/*.page.html", pathToTemplates))
 			if err != nil {
 				return myCache, err
 			}

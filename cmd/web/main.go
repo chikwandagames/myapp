@@ -49,6 +49,7 @@ func main() {
 // For testing
 func run() error {
 	// Tell the App what kind Custom types that we want to store in a session
+	// so that we can store them in the session
 	gob.Register(models.Reservation{})
 
 	// Change this to true when in production

@@ -17,6 +17,7 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
+// This type is what is returned by the middleware funcs i.e http.Handler
 type myHandler struct{}
 
 func (mh *myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
