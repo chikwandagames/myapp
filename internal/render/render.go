@@ -25,6 +25,13 @@ func NewTemplates(a *config.AppConfig) {
 
 // AddDefaultData is for adding data that we need present on every page
 func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	// Incase a user accesses a page, that should be a redirect,
+	// by typing the url manually
+	// This message will appear once, then automatically taken out of the session
+	td.Flash = app.Session.PopString(r.Context(), "flash")
+	td.Error = app.Session.PopString(r.Context(), "error")
+	td.Warning = app.Session.PopString(r.Context(), "warning")
+
 	td.CSRFToken = nosurf.Token(r)
 	return td
 }

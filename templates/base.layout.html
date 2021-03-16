@@ -108,7 +108,7 @@
             )
         })()
 
-      
+
         function notifyAlert(text, type) {
             notie.alert({
                 type,
@@ -125,8 +125,24 @@
             })
         }
 
+        // Icase there is an error on any of the pages
+        /*
+        { { with .Error} }
+        notify("{{.}}", "error");
+        { { end } }
+
+        { { with .Flash} }
+        notify("{{.}}", "success");
+        { { end } }
+
+        { { with .Warning} }
+        notify("{{.}}", "warning");
+        { { end } }
+        */
+
+
         const myHTML = `
-              <form id="check-availability-form" action="" method="post" novalidate class="needs-validation">
+            <form id="check-availability-form" action="" method="post" novalidate class="needs-validation">
                 <div class="form-row">
                     <div class="col">
                         <div class="form-row" id="reservation-dates-modal">
@@ -139,7 +155,7 @@
                         </div>
                     </div>
                 </div>
-              </form>
+            </form>
             `
 
         // Testing by clicking a button

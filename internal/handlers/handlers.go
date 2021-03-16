@@ -193,14 +193,22 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
+
 	// Get data received from the redirect from make-reservation form.
 	// .(models.Reservation) asserts that the data is of type models.Reservaion
 	reservation, ok := m.App.Session.Get(r.Context(), "reservation").(models.Reservation)
 
 	if !ok {
+		// Incase reservation-summary page is accessed without redirection from
+		// make reservation, in that case the will be no reservation object in the
+		m.App.Session.Put(r.Context(), "error", "Can't get reservation from session")
+		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+
 		log.Println("Cannot get item from session")
 		return
 	}
+	// Remove reservation from the summary when we are done with it
+	m.App.Session.Remove(r.Context(), "reservation")
 	data := make(map[string]interface{})
 	data["reservation"] = reservation
 	render.RenderTemplate(w, r, "reservation-summary.page.html", &models.TemplateData{
