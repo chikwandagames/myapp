@@ -1,0 +1,22 @@
+mode: set
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:26.47,30.2 1 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:33.33,35.2 1 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:41.67,48.2 3 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:53.68,68.2 5 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:71.74,84.2 4 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:87.78,90.16 2 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:96.2,114.19 6 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:130.2,131.66 2 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:90.16,93.3 2 0
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:114.19,125.3 4 0
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:136.71,138.2 1 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:141.69,143.2 1 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:146.75,148.2 1 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:151.70,153.2 1 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:156.79,164.2 3 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:176.79,185.16 3 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:190.2,191.14 2 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:185.16,187.3 1 0
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:195.81,201.9 2 1
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:211.2,216.4 4 0
+github.com/chikwandagames/myapp/internal/handlers/handlers.go:201.9,209.3 4 1

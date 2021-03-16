@@ -85,7 +85,7 @@ func getRoutes() http.Handler {
 	// mux.Use(WriteToConsole)
 	// This middleware says, ignore any request that is a post, that doesn't have
 	// a propper cross sight request forgery tocken
-	mux.Use(NoSurf)
+	// mux.Use(NoSurf)
 	mux.Use(SessionLoad)
 
 	mux.Get("/", Repo.Home)
